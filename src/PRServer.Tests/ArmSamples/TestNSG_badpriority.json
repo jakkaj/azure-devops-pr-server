@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "networkSecurityGroupName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroupName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "JORDO-TEST-RULES",
+                        "properties": {
+                            "access": "Allow",
+                            "priority": 10,
+                            "direction": "Inbound",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "sourcePortRanges": [],
+                            "destinationPortRange": "",
+                            "destinationPortRanges": [
+                                "454",
+                                "455"
+                            ],
+                            "sourceAddressPrefix": "Internet",
+                            "sourceAddressPrefixes": null,
+                            "destinationAddressPrefix": "",
+                            "destinationAddressPrefixes": [
+                                "10.211.42.192/26"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

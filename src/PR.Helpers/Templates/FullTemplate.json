@@ -1,0 +1,16 @@
+﻿{
+    "properties": {
+        "template": 
+            %%template%%
+        ,
+        "parameters": {
+            "networkSecurityGroupName": {
+                "value": "kljsdfljk"
+            },
+            "location": {
+                "value": "australiaeast"
+            }
+        },
+        "mode": "Incremental"
+    }
+}

@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
+		<ApplicationInsightsResourceId>/subscriptions/e39a92b5-b9a4-43d1-97a3-c31c819a583a/resourcegroups/CBAStuff/providers/microsoft.insights/components/CBA.PRSite</ApplicationInsightsResourceId>
+		<ApplicationInsightsAnnotationResourceId>/subscriptions/e39a92b5-b9a4-43d1-97a3-c31c819a583a/resourcegroups/CBAStuff/providers/microsoft.insights/components/CBA.PRSite</ApplicationInsightsAnnotationResourceId>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="Templates\FullTemplate.json" />
+	  <Content Remove="Templates\NSGTemplate.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Templates\FullTemplate.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Templates\NSGTemplate.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="3.19.8" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PR.Helpers\PR.Helpers.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <WCFMetadata Include="Connected Services" />
+	</ItemGroup>
+
+</Project>

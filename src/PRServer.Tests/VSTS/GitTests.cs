@@ -20,7 +20,7 @@ namespace PRServer.Tests.VSTS
         [TestMethod]
         public async Task CreatePRStatus()
         {
-            var data = File.ReadAllText("SerialisedObjects\\req3.json");
+            var data = File.ReadAllText("SerialisedObjects\\req4.json");
 
             var obj = JsonConvert.DeserializeObject<VstsRequest>(data);
 
@@ -42,7 +42,7 @@ namespace PRServer.Tests.VSTS
 
             var it = its.Last();
             var prStatus = new GitPullRequestStatus();
-            prStatus.Context = new GitStatusContext {Genre = "testing", Name = "prtester"};
+            prStatus.Context = new GitStatusContext {Genre = AppSettings.Genre, Name = AppSettings.Name};
             prStatus.State = GitStatusState.Succeeded;
             prStatus.Description = "All seems good dude6.";
             prStatus.IterationId = it.Id;

@@ -35,7 +35,9 @@ namespace PR.Helpers.Validators
                 //load all the subtemplates and process them through
                 var parsed = JObject.Parse(contents);
 
-                var result = await _restChecker.CheckArm(contents, _secrets);
+                var builtTemplate = _templateBuilder.Build("FullTemplate.json", contents);
+
+                var result = await _restChecker.CheckArm(builtTemplate, _secrets);
 
                 if (result.error != null)
                 {

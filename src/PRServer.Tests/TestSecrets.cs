@@ -14,7 +14,8 @@ namespace PRServer.Tests
             Assert.IsFalse(string.IsNullOrWhiteSpace(secret.Value.TenantId));
             Assert.IsFalse(string.IsNullOrWhiteSpace(secret.Value.PAT));
             Assert.IsFalse(string.IsNullOrWhiteSpace(AppSettings.AzureDevOpsCollectionName));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(AppSettings.StatusPath));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(AppSettings.Genre));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(AppSettings.Name));
         }
     }
 }

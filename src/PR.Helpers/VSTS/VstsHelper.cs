@@ -57,7 +57,7 @@ namespace PR.Helpers.VSTS
         {
             var gitClient = _getGitClient(req);
             var prStatus = new GitPullRequestStatus();
-            prStatus.Context = new GitStatusContext { Genre = "testing", Name = "prtester" };
+            prStatus.Context = new GitStatusContext { Genre = _settings.Value.Genre, Name = _settings.Value.Name };
             prStatus.State = GitStatusState.Pending;
             var repoId = req.resource.repository.id;
             var gRepoId = new Guid(repoId);
@@ -90,7 +90,7 @@ namespace PR.Helpers.VSTS
             var it = its.Last();
 
             var prStatus = new GitPullRequestStatus();
-            prStatus.Context = new GitStatusContext { Genre = "testing", Name = "prtester" };
+            prStatus.Context = new GitStatusContext { Genre = _settings.Value.Genre, Name = _settings.Value.Name };
             prStatus.IterationId = it.Id;
 
             if (result.Failed)
@@ -159,6 +159,10 @@ namespace PR.Helpers.VSTS
 
                 foreach (var i in items.Where(_ => !_.IsFolder))
                 {
+                    if (i.Path.ToLower().IndexOf("gitignore", StringComparison.Ordinal) != -1)
+                    {
+                        continue;
+                    }
                     var content = await gitClient.GetItemAsync(repoId,
                         i.Path, includeContent: true, versionDescriptor: versionDesc);
 

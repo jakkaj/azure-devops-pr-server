@@ -17,7 +17,7 @@ namespace PRServer.Tests.VSTS
         [TestMethod]
         public async Task TestNewPR()
         {
-            var data = File.ReadAllText("SerialisedObjects\\req3.json");
+            var data = File.ReadAllText("SerialisedObjects\\req4.json");
 
             var obj = JsonConvert.DeserializeObject<VstsRequest>(data);
 

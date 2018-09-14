@@ -37,7 +37,7 @@ namespace PRServer.Web.Controllers
             
 
             var ser = JsonConvert.SerializeObject(req);
-            System.IO.File.WriteAllText("C:\\Temp\\ser\\req4.json", ser);
+            System.IO.File.WriteAllText("C:\\Temp\\ser\\req6.json", ser);
             return Ok();
             //using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             //{

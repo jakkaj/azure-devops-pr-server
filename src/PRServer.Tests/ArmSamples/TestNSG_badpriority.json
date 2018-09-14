@@ -28,14 +28,14 @@
                             "sourcePortRanges": [],
                             "destinationPortRange": "",
                             "destinationPortRanges": [
-                                "454",
-                                "455"
+                                "450",
+                                "451"
                             ],
                             "sourceAddressPrefix": "Internet",
                             "sourceAddressPrefixes": null,
                             "destinationAddressPrefix": "",
                             "destinationAddressPrefixes": [
-                                "10.211.42.192/26"
+                                "10.0.0.192/26"
                             ]
                         }
                     }

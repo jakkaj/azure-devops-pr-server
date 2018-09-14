@@ -20,7 +20,7 @@ namespace PRServer.Tests.VSTS
         [TestMethod]
         public async Task CreatePRStatus()
         {
-            var data = File.ReadAllText("SerialisedObjects\\req4.json");
+            var data = File.ReadAllText("SerialisedObjects\\req6.json");
 
             var obj = JsonConvert.DeserializeObject<VstsRequest>(data);
 
@@ -66,7 +66,7 @@ namespace PRServer.Tests.VSTS
         [TestMethod]
         public async Task TestPullClean()
         {
-            var data = File.ReadAllText("SerialisedObjects\\vsts_req.json");
+            var data = File.ReadAllText("SerialisedObjects\\req6.json");
 
             var obj = JsonConvert.DeserializeObject<VstsRequest>(data);
 

@@ -66,6 +66,12 @@
     <None Update="SerialisedObjects\req4.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SerialisedObjects\req5.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SerialisedObjects\req6.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SerialisedObjects\vsts_req.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

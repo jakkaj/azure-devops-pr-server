@@ -4,6 +4,8 @@ Azure DevOps has the capability to call out to external services and have them s
 
 This [ASP.NET Core](https://www.microsoft.com/net/download) 2 based sample accepts the call out, grabs the files from the pull request and validates them against the Azure ARM template validation end point. 
 
+The pull request is blocked until the external services says the policy has been satisfied. Any errors are posted to the pull request thread as a comment (complete with markdown). 
+
 This type of real-world check validates that the ARM template will deploy - including checking for detailed correctness. Something obscure such as overlapping networks in NSG templates would not be picked up by straight up JSON schema validation. 
 
 A [node.js sample](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-pr-status-server?view=vsts) is available. 
@@ -39,8 +41,9 @@ Prepare a notepad document with the following:
 - A [Service Principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest)
     - Populate AppId, Password and TenantId from the SP creation process in to that notepad doc
 - An Azure DevOps Account
-- An Azure DevOps [Personal Access Token](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts) (PAT) on the right account
+- An Azure DevOps [Personal Access Token](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts) (PAT) on the right account 
     - Fill this in the notepad doc with this as well
+- It's best if this master in this repo is empty as in the current format the web server will try and check all files - so it will always fail if there are non-valid arm templates.
 - A resource group in your tenant
     - In Visual Studio, populate the group name in `appsettings.json` for `PRServer.Tests` and `PRServer.Web`
     - Same for your azure subscription Id (you can see this when you log in to the AZ CLI)
@@ -144,4 +147,44 @@ Hover over master and click the "..." ellipsis and select "Branch Policies".
 
 To turn on enforced pull requests select "Require a minimum number of reviewers", set min to 1 for testing (so you can approve yourself) and also select "Allow users to approve their own changes.". This is not a great production setting, but it's good for testing. Normally you'd not allow users to approve themselves! Although there is a use case for enforced PR when policy checks such as this are in place so they can approve themselves but must pass policy first... cool!
 
+Next we'll add the ARM Validation Policy. This policy will force the PR to stop and wait until the external server (ours!) returns and gives the nod. 
 
+Click on "Add status policy". Enter "validations/armvalidator" as the Status to check. 
+
+Ensure you expand the advanced section and check "Reset status whenever there are new changes". This means each new push to the pull request branch will cause the policy checks to re-run (allow users to fix things withough having to re-create another PR). 
+
+![PR Policy](https://user-images.githubusercontent.com/5225782/45523745-2daa7980-b80e-11e8-9a39-8ca9aa0d2335.PNG)
+
+We're golden!
+
+Now for a PR. 
+
+### Create a PR
+
+Check out master and create a branch. 
+
+It's best if this master is empty as in the current format the web server will try and check all files - so it will always fail if there are non-valid arm templates. 
+
+Create a new ARM template - there are some sample good and bad ones under `PRServer.Tests\ArmSamples`. Try one of those broken ones. 
+
+Check it in and [create a new PR](https://docs.microsoft.com/en-us/azure/devops/repos/git/pullrequest?view=vsts) in Azure DevOps. 
+
+
+Note the policy is waiting run run. 
+
+![5](https://user-images.githubusercontent.com/5225782/45523868-dc4eba00-b80e-11e8-9ff2-3b732831f515.PNG)
+
+Then it will switch to pending:
+
+![6](https://user-images.githubusercontent.com/5225782/45523885-f38da780-b80e-11e8-8555-7d622b2f02d5.PNG)
+
+
+Depending on your JSON you'll either see somethign like a JSON fail or a more in-depth Azure Fail
+
+![7](https://user-images.githubusercontent.com/5225782/45523903-0902d180-b80f-11e8-9db0-44181e747f04.PNG)
+
+or
+
+![8](https://user-images.githubusercontent.com/5225782/45523927-29329080-b80f-11e8-86a2-e5d1793a4d15.PNG)
+
+You can edit your PR and push up changes to the same branch and the policy evaluations still still run!

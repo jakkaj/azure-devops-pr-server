@@ -179,7 +179,7 @@ Then it will switch to pending:
 ![6](https://user-images.githubusercontent.com/5225782/45523885-f38da780-b80e-11e8-8555-7d622b2f02d5.PNG)
 
 
-Depending on your JSON you'll either see somethign like a JSON fail or a more in-depth Azure Fail
+Depending on your JSON you'll either see something like a JSON fail or a more in-depth Azure Fail
 
 ![7](https://user-images.githubusercontent.com/5225782/45523903-0902d180-b80f-11e8-9db0-44181e747f04.PNG)
 
